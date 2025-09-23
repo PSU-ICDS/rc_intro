@@ -14,7 +14,7 @@
 start_time=$(date +%s)
 
 module load anaconda/2023
-module list
+module list 2>&1
 conda activate rc_intro_env
 
 python pi_serial.py > out/${SLURM_JOB_NAME}-${SLURM_JOB_ID}.pyout
