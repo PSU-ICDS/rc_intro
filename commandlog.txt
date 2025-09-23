@@ -1,0 +1,47 @@
+#
+# Commands for Setting up the Software Environment
+#
+
+# initialize interactive compute session
+salloc -N 2 -n 6 -A open -t 2:00:00
+
+# navigate to scratch
+cd ~/scratch
+
+# download workshop repo
+wget www.emeryetter.com/share/rc_intro.zip
+unzip rc_intro.zip
+
+# OR clone the repo
+git clone https://github.com/ecetter/rc_intro.git
+
+# navigate to workshop directory
+cd rc_intro
+
+# show task distribution and hostnames
+bash checknodefile.sh
+scontrol show hostname
+
+# load software from software stack
+module load anaconda/2023
+
+# create a conda environment for hands-on activities
+conda create -y -n rc_intro_env numpy mpi4py
+
+# activate environment
+conda activate rc_intro_env
+
+# monitoring jobs
+squeue -u $(whoami)
+export SQUEUE_FORMAT="%.9i %9P %35j %.8u %.2t %.12M %.12L %.5C %.7m %.4D %R"
+squeue -u $(whoami)
+scontrol show job <jobid>
+
+# monitor a job example
+cd pi_example
+sbatch submit-pi_serial.slurm
+sbatch submit-pi_parallel.slurm
+squeue -u $(whoami)
+ssh <comp-node-id>
+top -Hu $(whoami)
+ps -aux | grep $(whoami)
