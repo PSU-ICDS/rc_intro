@@ -1,14 +1,14 @@
 #!/bin/bash
 
-#SBATCH --job-name=pi_serial
-#SBATCH --account=open
-#SBATCH --partition=open
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --mem=1G
-#SBATCH --time=00:30:00
-#SBATCH --output=out/%x-%j.out
-#SBATCH --error=out/%x-%j.err
+#SBATCH --job-name=pi_serial        #### give the job a name
+#SBATCH --account=open              #### specify the account
+#SBATCH --partition=open            #### specify the partition
+#SBATCH --nodes=1                   #### request a node
+#SBATCH --ntasks=1                  #### request a task / cpu
+#SBATCH --mem=1G                    #### request the memory required per node
+#SBATCH --time=00:30:00             #### set a limit on the total run time
+#SBATCH --output=out/%x-%j.out      #### specify the name of job's output file
+#SBATCH --error=out/%x-%j.err       #### specify the name of job's error file
 
 module load anaconda/2023
 conda activate rc_intro_env
