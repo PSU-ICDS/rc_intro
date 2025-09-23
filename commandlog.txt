@@ -23,7 +23,7 @@ bash checknodefile.sh
 scontrol show hostname
 
 # load software from software stack
-module load anaconda/2023
+module load anaconda/2023 intel impi
 
 # create a conda environment for hands-on activities
 conda create -y -n rc_intro_env numpy mpi4py

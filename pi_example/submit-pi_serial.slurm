@@ -10,7 +10,15 @@
 #SBATCH --output=out/%x-%j.out      #### specify the name of job's output file
 #SBATCH --error=out/%x-%j.err       #### specify the name of job's error file
 
+
+start_time=$(date +%s)
+
 module load anaconda/2023
+module list
 conda activate rc_intro_env
 
 python pi_serial.py > out/${SLURM_JOB_NAME}-${SLURM_JOB_ID}.pyout
+
+end_time=$(date +%s)
+duration=$(( end_time - start_time ))
+echo "Job Duration:  $duration  sec"

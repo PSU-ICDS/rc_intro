@@ -11,7 +11,14 @@
 #SBATCH --error=out/%x-%j.err       #### specify the name of job's error file
 
 
-module load anaconda/2023
+start_time=$(date +%s)
+
+module load anaconda/2023 intel impi
+module list
 conda activate rc_intro_env
 
-srun python pi_parallel.py > out/${SLURM_JOB_NAME}-${SLURM_JOB_ID}.out
+srun python pi_parallel.py > out/${SLURM_JOB_NAME}-${SLURM_JOB_ID}.pyout
+
+end_time=$(date +%s)
+duration=$(( end_time - start_time ))
+echo "Job Duration:  $duration  sec"
